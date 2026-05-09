@@ -22,7 +22,7 @@ use ZipArchive;
 final class Installer
 {
     private const REPO = 'lozymon/ruleshub';
-    private const BINARY_VERSION = '0.1.0-alpha.3';
+    private const BINARY_VERSION = '0.1.0-alpha.4';
 
     public static function install(IOInterface $io): void
     {
