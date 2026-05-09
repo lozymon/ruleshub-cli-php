@@ -1,0 +1,38 @@
+{
+  "name": "ruleshub/cli",
+  "description": "RulesHub CLI — install, publish, and manage AI coding tool assets. Composer plugin that downloads the canonical Rust binary from GitHub Releases on install.",
+  "type": "composer-plugin",
+  "license": "MIT",
+  "homepage": "https://ruleshub.dev",
+  "support": {
+    "issues": "https://github.com/lozymon/ruleshub/issues",
+    "source": "https://github.com/lozymon/ruleshub"
+  },
+  "keywords": [
+    "cli",
+    "ai",
+    "claude",
+    "cursor",
+    "rules"
+  ],
+  "require": {
+    "php": ">=8.2",
+    "ext-zip": "*",
+    "ext-openssl": "*",
+    "composer-plugin-api": "^2.0"
+  },
+  "require-dev": {
+    "composer/composer": "^2.7"
+  },
+  "bin": [
+    "bin/ruleshub"
+  ],
+  "autoload": {
+    "psr-4": {
+      "RulesHub\\Cli\\": "src/"
+    }
+  },
+  "extra": {
+    "class": "RulesHub\\Cli\\Plugin"
+  }
+}

@@ -1,0 +1,7 @@
+# Files excluded from the published Composer archive.
+# Keeps the package small and stops users from accidentally seeing repo metadata.
+
+/.gitattributes export-ignore
+/.github       export-ignore
+/tests         export-ignore
+/README.md     export-ignore

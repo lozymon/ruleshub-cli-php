@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+// Permanent PHP launcher. The native ruleshub binary is downloaded by the
+// Composer plugin to a sibling path; this script just forwards arguments.
+//
+// Why a launcher instead of replacing this file with the binary directly:
+// Composer's Windows bin proxy generates a .bat that runs `php bin/ruleshub`,
+// so this entry point must stay PHP-executable forever. The actual binary
+// lives at bin/ruleshub-bin (Linux/macOS) or bin/ruleshub-bin.exe (Windows).
+
+$dir = __DIR__;
+$ext = PHP_OS_FAMILY === 'Windows' ? '.exe' : '';
+$bin = "{$dir}/ruleshub-bin{$ext}";
+
+if (!is_file($bin)) {
+    fwrite(STDERR, "ruleshub: native binary not found at {$bin}\n");
+    fwrite(STDERR, "  the Composer plugin downloads it on install — did the install fail or were plugins disabled?\n");
+    fwrite(STDERR, "  re-run: composer reinstall ruleshub/cli\n");
+    exit(127);
+}
+
+$args = array_slice($_SERVER['argv'], 1);
+$cmd = escapeshellarg($bin);
+foreach ($args as $arg) {
+    $cmd .= ' ' . escapeshellarg((string) $arg);
+}
+
+$rc = 0;
+passthru($cmd, $rc);
+exit($rc);
